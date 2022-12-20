@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
 import { Navbar } from "./components/Navbar";
+import { Article } from "./components/Article";
 
 function App() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Article[] | null>([]);
   const getData = async () => {
     const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-    const data = await response.json();
+    const data: Article[] = await response.json();
     data.length = 20;
     setData(data);
   };
@@ -17,39 +18,36 @@ function App() {
     document.title = "Pancake Layout";
   }, []);
   return (
-    <div className="grid grid-rows-pancake h-screen min-h-screen container mx-auto gap-8">
+    <div className="grid overflow-hidden grid-cols-holygrail grid-rows-holygrail h-screen min-h-screen container mx-auto gap-8">
       <Navbar />
-      <main className="grid grid-cols-ram gap-8 mx-3 place-items-center ">
-        {Array.isArray(data)
-          ? data.map((item) => {
-            return (
-              <article className="p-5 shadow dark:shadow-none dark:bg-gray-700/50 rounded min-w-[10rem] h-full">
-                <header className="text-xl">
-                  <h1>{item.title}</h1>
-                </header>
-                <section>
-                  <p>{item.body}</p>
-                  <p>{item.id}</p>
-                </section>
-              </article>
-            );
-          })
-          : "data not found"}
-      </main>
-      <footer className=" p-5 grid grid-rows-pancake gap-8">
+      <aside className="bg-pink-700 rounded col-start-1 p-5 col-end-2 ">
         <header>
-          <h1 className="text-3xl">Footer</h1>
+          <h1>Left Sidebar</h1>
         </header>
-        <section className="grid-cols-3 grid gap-5">
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-          <div>5</div>
-        </section>
-        <section>
-          <p>Copyright Fikri Fadillah</p>
-        </section>
+      </aside>
+      <main className="overflow-scroll">
+        <header>
+          <h1 className="text-xl">Main Content</h1>
+        </header>
+        <div className="grid gap-8">
+          {Array.isArray(data)
+            ? data.map((data) => {
+              return (
+                <Article title={data.title} id={data.id} body={data.body} />
+              );
+            })
+            : "There is no data"}
+        </div>
+      </main>
+      <aside className="bg-teal-700 p-5">
+        <header>
+          <h1>Left Sidebar</h1>
+        </header>
+      </aside>
+      <footer className="min-h-[5vh]">
+        <header>
+          <h1 className="text-2xl">Footer</h1>
+        </header>
       </footer>
     </div>
   );

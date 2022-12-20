@@ -1,6 +1,6 @@
 export const Navbar = () => {
   return (
-    <nav className="p-3 shadow h-[10vh] flex items-center justify-around">
+    <nav className="p-3 col-span-full shadow h-[10vh] flex items-center justify-around">
       <header>
         <h1>Navbar</h1>
       </header>

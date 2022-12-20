@@ -5,9 +5,11 @@ module.exports = {
     extend: {
       gridTemplateRows: {
         pancake: "auto 1fr auto",
+        holygrail: "auto 1fr auto",
       },
       gridTemplateColumns: {
         ram: "repeat(auto-fill,minmax(15rem,1fr))",
+        holygrail: "auto 1fr auto",
       },
     },
   },
